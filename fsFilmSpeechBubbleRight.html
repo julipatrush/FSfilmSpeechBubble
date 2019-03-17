@@ -1,0 +1,223 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <span id="hiddenText">Hi Fabian, ich liebe dich! deine Katze</span>
+    <div id="container">
+      <!-- for the speechBubble there are two classes defined:
+    1) "growing" - it grows till the specified width, then it breaks the text to the next line
+    2) "fix" - the speechBubble has from the beginning the fix width
+   -->
+      <div id="speechBubble" class="growing">
+      </div>
+      <div id="status">
+        <svg id="clock" width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+            <title>Group 2</title>
+            <desc>Created with Sketch.</desc>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Artboard" transform="translate(-468.000000, -39.000000)" stroke="#979797">
+                    <g id="Group-2" transform="translate(468.500000, 40.000000)">
+                        <path d="M4,12.2777778 L9,12.2777778 C11.209139,12.2777778 13,10.4869168 13,8.27777778 L13,4 C13,1.790861 11.209139,-2.18216909e-15 9,-1.77635684e-15 L4,-1.77635684e-15 C1.790861,-1.37054459e-15 -2.705415e-16,1.790861 0,4 L0,8.27777778 C2.705415e-16,10.4869168 1.790861,12.2777778 4,12.2777778 Z" id="Path-3"></path>
+                        <polyline id="Path-4" points="5.77777778 2.88888889 5.77777778 7.22222222 8.66666667 7.22222222"></polyline>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <svg id="firstInactive" width="16px" height="14px" viewBox="0 0 16 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+            <title>Sent</title>
+            <desc>Sent icon</desc>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Artboard" transform="translate(-468.000000, -55.000000)" stroke="#979797" stroke-width="2.5">
+                    <g id="Group-3" transform="translate(469.000000, 56.000000)">
+                        <polyline id="Path-2" points="0 6.63157895 5.15789474 11.0526316 14 7.01660952e-14"></polyline>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <svg id="secondInactive" width="22px" height="14px" viewBox="0 0 22 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+            <title>Delivered</title>
+            <desc>Delivered icon</desc>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Artboard" transform="translate(-468.000000, -55.000000)" stroke="#979797" stroke-width="2.5">
+                    <g id="Group-3" transform="translate(469.000000, 56.000000)">
+                        <polyline id="Path-2" points="10 10 11.1578947 11.0526316 20 -4.17443857e-14"></polyline>
+                        <polyline id="Path-2" points="0 6.63157895 5.15789474 11.0526316 14 7.01660952e-14"></polyline>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <svg id="secondActive" width="22px" height="14px" viewBox="0 0 22 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+            <title>Read</title>
+            <desc>Read icon</desc>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Artboard" transform="translate(-468.000000, -55.000000)" stroke="#4FC3F7" stroke-width="2.5">
+                    <g id="Group-3" transform="translate(469.000000, 56.000000)">
+                        <polyline id="Path-2" points="10 10 11.1578947 11.0526316 20 -4.17443857e-14"></polyline>
+                        <polyline id="Path-2" points="0 6.63157895 5.15789474 11.0526316 14 7.01660952e-14"></polyline>
+                    </g>
+                </g>
+            </g>
+        </svg>
+      </div>
+      <div id="speechArrow"></div>
+    </div>
+    <style media="screen">
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100px;
+      width:1030px;
+      left: 500px;
+      min-height:400;
+      z-index:100;
+      background-color: transparent;
+      overflow: hidden;
+      justify-content:flex-end;
+    }
+
+    #status svg {
+      display: none;
+    }
+    #status {
+      width: 400px;
+      display: flex;
+      justify-content: flex-end;
+      bottom: 25px;
+    position: absolute;
+    }
+
+    #speechBubble {
+        min-height: 1.2em;
+        background-color: #d4eaff;
+        //position: absolute;
+        bottom:30;
+        border:1px solid #fff;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom:0.5px solid #fff;
+        padding:10px;
+        font-size: 1.7em;
+        font-family:sans-serif;
+        -webkit-transition: max-height 4s linear;
+        -moz-transition: max-height 4s linear;
+        -ms-transition: max-height 4s linear;
+        -o-transition: max-height 4s linear;
+        transition: max-height 4s linear;
+    }
+    .hide {
+      display: none
+
+    }
+
+      #speechBubble.growing {
+        min-width:1px;
+        max-width:400px;
+      }
+
+      #speechBubble.fix {
+        width:400px;
+      }
+
+      #speechArrow:before {
+          position: relative;
+          width: 0;
+          height: 0;
+          border-top: 24px solid #fff;
+          border-left: 24px solid transparent;
+          border-right: 24px solid transparent;
+          left: 319px;
+          bottom: -18px;
+          content: "";
+          z-index: -1;
+          transition: bottom 1s ease 0s;
+      }
+
+      #speechArrow:after {
+          position: relative;
+          width: 0;
+          height: 0;
+          border-top: 20px solid #d4eaff;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          left: 275px;
+          bottom: -17px;
+          content: "";
+          z-index: 120;
+          transition: bottom 1s ease 0s;
+      }
+
+      body {
+        background-color: #007F00;
+      }
+
+      #hiddenText {
+        display:none;
+      }
+      html, body {
+        padding:0;
+        margin:0;
+      }
+
+    </style>
+    <script>
+      var index = 0;
+      var min = 100;
+      var max = 250;
+      var text = document.getElementById('hiddenText').innerHTML;
+      var textLength = text.length;
+      console.log(textLength);
+      if (document.getElementById('speechBubble').className == "fix") {
+        setTimeout(changeWidth, 200);
+      }
+
+      function type() {
+        if (textLength > index) {
+          document.getElementById('speechBubble').innerHTML += text.charAt(index);
+          index += 1;
+          var t = setTimeout(type, (Math.floor(Math.random() * (+max - +min)) + +min));
+      } else {
+        document.getElementById('speechBubble').style.padding = "10px 10px 30px 10px"
+        document.getElementById('clock').style.display="block";
+        var two = setTimeout(changeMessageStatusSecond, 2000);
+        var three = setTimeout(changeMessageStatusThird, 3000);
+        var four = setTimeout(changeMessageStatusForth, 4000);
+      }
+    }
+      function changeWidth(){
+        document.getElementById('speechBubble').style.width="400px"
+      }
+      function changeMessageStatusFirst() {
+        document.getElementById("clock").style.display ="none";
+        document.getElementById("clock").style.display ="block";
+        console.log("clock");
+      }
+      function changeMessageStatusSecond() {
+        document.getElementById("clock").style.display ="none";
+        document.getElementById("firstInactive").style.display ="block";
+        console.log("one");
+      }
+      function changeMessageStatusThird() {
+        document.getElementById("firstInactive").style.display ="none";
+        document.getElementById("secondInactive").style.display ="block";
+        console.log("two");
+      }
+      function changeMessageStatusForth() {
+        document.getElementById("secondInactive").style.display ="none";
+        document.getElementById("secondActive").style.display ="block";
+        console.log("three");
+      }
+type();
+
+    </script>
+  </body>
+
+</html>
