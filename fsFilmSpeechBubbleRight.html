@@ -3,7 +3,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
   </head>
   <body>
-    <span id="hiddenText">Hi Fabian, ich liebe dich! deine Katze</span>
+    <span id="hiddenText">Lorem ipsum dolor sit amet, consetetur</span>
     <div id="container">
       <!-- for the speechBubble there are two classes defined:
     1) "growing" - it grows till the specified width, then it breaks the text to the next line
@@ -89,8 +89,9 @@
       width: 400px;
       display: flex;
       justify-content: flex-end;
-      bottom: 25px;
-    position: absolute;
+      bottom: 30px;
+      left: 10px;
+      position: absolute;
     }
 
     #speechBubble {
@@ -104,7 +105,7 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         border-bottom:0.5px solid #fff;
-        padding:10px;
+        padding:10px 10px 10px 15px;
         font-size: 1.7em;
         font-family:sans-serif;
         -webkit-transition: max-height 4s linear;
@@ -185,7 +186,7 @@
           index += 1;
           var t = setTimeout(type, (Math.floor(Math.random() * (+max - +min)) + +min));
       } else {
-        document.getElementById('speechBubble').style.padding = "10px 10px 30px 10px"
+        document.getElementById('speechBubble').style.padding = "10px 10px 30px 15px"
         document.getElementById('clock').style.display="block";
         var two = setTimeout(changeMessageStatusSecond, 2000);
         var three = setTimeout(changeMessageStatusThird, 3000);
